@@ -1,18 +1,29 @@
-#include "../include/Data.hpp"
-#include "../include/Serializer.hpp"
-#include <sstream>
+#include <iostream>
+#include "../include/Iter.hpp"
 
-int main()
+template <typename T>
+void print(const T &val)
 {
-	Data d(10);
-	Data *original_ptr = &d;
-	std::cout << d.get_data() << std::endl;
-	uintptr_t u = Serializer::serialize(original_ptr);
-	std::cout << "------------serialize------------" << std::endl;
-	std::cout << "uintptr_t: " << "0x" << std::hex << u << std::hex << std::endl;
-	std::cout << "------------deserialize------------" << std::endl;
-	Data *a = Serializer::deserialize(u);
-	std::cout << "Data *: " << a << std::endl;
-	std::cout << a->get_data() << std::endl;
-	return (0);
+    std::cout << val << std::endl;
+}
+
+template <typename T>
+void incr(T &val)
+{
+    val++;
+}
+
+int main( void ) 
+{
+    char c_array[] = {'a', 'b', 'c'};
+    ::Iter(c_array, 3, print<char>);
+	::Iter(c_array, 3, incr<char>);
+	::Iter(c_array, 3, print<char>);
+    int i_array[] = {1, 2, 3};
+	::Iter(i_array, 3, print<int>);
+	::Iter(i_array, 3, incr<int>);
+	::Iter(i_array, 3, print<int>);
+	std::string s_array[] = {"salut", "yo", "au revoir"};
+	::Iter(s_array, 3, print<std::string>);
+    return 0;
 }
