@@ -1,5 +1,5 @@
-#ifndef FCT_TEMPLATE_HPP
-#define FCT_TEMPLATE_HPP
+#ifndef WHATEVER_HPP
+#define WHATEVER_HPP
 #include <iostream>
 template<typename T>
 void swap(T& value1, T& value2)
