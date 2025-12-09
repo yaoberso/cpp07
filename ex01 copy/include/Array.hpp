@@ -1,6 +1,7 @@
 #ifndef ARRAY_HPP
 #define ARRAY_HPP
 #include <iostream>
+#include <stdexcept>
 
 template<class T> class Array{
 	public:
@@ -8,6 +9,13 @@ template<class T> class Array{
 		{
 			_array = NULL;
 			_n = 0;
+		}
+		~Array()
+		{
+			if (_array != NULL)
+			{
+				delete[] _array;
+			}
 		}
 		Array(unsigned int n)
 		{
@@ -50,8 +58,18 @@ template<class T> class Array{
 			}
 			return (*this);
 		}
-		T &operator[](const Array &content);
-		const int size();
+		T &operator[](unsigned int n)
+		{
+			if (n >= _n)
+			{
+				throw std::out_of_range("n is out of range!");
+			}
+			return (_array[n]);
+		}
+		unsigned int size() const
+		{
+			return (_n);
+		}
 	private:
 		T* _array;
 		unsigned int _n;
