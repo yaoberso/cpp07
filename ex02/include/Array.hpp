@@ -60,7 +60,7 @@ template<class T> class Array{
 		}
 		T &operator[](unsigned int n)
 		{
-			if (n >= _n)
+			if (n >= _n || n < 0)
 			{
 				throw std::out_of_range("n is out of range!");
 			}
